@@ -2,6 +2,10 @@ const express = require("express");
 const app = express();
 const port = 8600;
 
+app.get("/", (req, resp) => {
+  resp.send("it is running");
+});
+
 app.listen(port, (err) => {
   if (err) {
     console.log(err);
