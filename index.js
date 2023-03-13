@@ -29,6 +29,20 @@ app.post("/create_contact", async function (req, resp) {
     console.log(err);
   }
 });
+// get routes
+app.get("/get-contact", async function (req, resp) {
+  try {
+    const getData = await Contact.find({});
+    console.log("getData");
+
+    resp.status(200).json({
+      message: "Contact created",
+      data: getData,
+    });
+  } catch {
+    console.log("err");
+  }
+});
 
 app.listen(port, (err) => {
   if (err) {
