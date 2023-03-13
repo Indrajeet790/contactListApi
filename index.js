@@ -33,7 +33,7 @@ app.post("/create_contact", async function (req, resp) {
 app.get("/get-contact", async function (req, resp) {
   try {
     const getData = await Contact.find({});
-    console.log("getData");
+    // console.log("getData");
 
     resp.status(200).json({
       message: "Contact created",
@@ -41,6 +41,26 @@ app.get("/get-contact", async function (req, resp) {
     });
   } catch {
     console.log("err");
+  }
+});
+// delete routes for(delete contact with help of id)
+app.delete("/delete-contact", async function (req, resp) {
+  let id = req.query.i;
+  // console.log(id);
+  try {
+    const contact = await Contact.findOne({ id });
+    if (!contact) {
+      resp.send("no contact present in database");
+    } else {
+      const deleteContact = await Contact.findByIdAndDelete(id);
+    }
+
+    resp.status(200).json({
+      message: "Contact deleted successfully",
+      data: deleteContact,
+    });
+  } catch (err) {
+    console.log("err in delete contact");
   }
 });
 
