@@ -45,7 +45,7 @@ app.get("/get-contact", async function (req, resp) {
 });
 // delete routes for(delete contact with help of id)
 app.delete("/delete-contact", async function (req, resp) {
-  let id = req.query.i;
+  let id = req.query.id;
   // console.log(id);
   try {
     const contact = await Contact.findOne({ id });
