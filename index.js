@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+app.use(express.json());
 const port = 8600;
 // database connection
 const db = require("./config/mongoose");
@@ -8,25 +9,25 @@ const db = require("./config/mongoose");
 const Contact = require("./models/contact");
 
 // add middleware from body parser
-app.use(express.json());
 
 // post route for create contact
-app.post("/create_contact", function (req, resp) {
-  Contact.create({
-    name: req.body.name,
-    phone: req.body.phone,
-  }),
-    function (err, newContact) {
-      if (err) {
-        console.log("err in create contact list");
-        return;
-      }
-      return resp.json({
-        message: "Contact created",
+app.post("/create_contact", async function (req, resp) {
+  try {
+    const newContact = await Contact.create({
+      name: req.body.name,
+      phone: req.body.phone,
+    });
+    console.log(newContact);
+
+    resp.status(200).json({
+      status: "success",
+      data: {
         data: newContact,
-      });
-    };
-  console.log(message);
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.listen(port, (err) => {
