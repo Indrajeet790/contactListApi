@@ -18,6 +18,6 @@
   "homepage": "https://github.com/IndrajeetKumarNayak/contactListApi#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "mongoose": "^7.0.1"
+    "mongoose":  "^6.8.4"
   }
 }
