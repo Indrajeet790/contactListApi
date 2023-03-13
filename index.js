@@ -64,6 +64,30 @@ app.delete("/delete-contact", async function (req, resp) {
   }
 });
 
+// create routes for patch contact
+app.patch("/update/:id", async function (req, resp) {
+  console.log(req.params);
+
+  try {
+    const updatedContact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        useUnifiedTopology: true,
+      }
+    );
+    resp.status(200).json({
+      status: "success",
+      data: {
+        updatedContact,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.listen(port, (err) => {
   if (err) {
     console.log(err);
